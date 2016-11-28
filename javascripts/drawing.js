@@ -201,6 +201,9 @@ var drawEdge = function(node1,node2,color) {
 }
 // Draws the entire grpah
 var drawGraph = function() {
+  ctx.fillStyle = '#4CAF50';
+  ctx.rect(0, 0, window.innerWidth, window.innerHeight);
+  ctx.fill();
   for(var i = 0; i < g.nodes.length; i++) {
     var current = g.nodes[i];
     for(var j = 0; j < current.edges.length; j++) {
@@ -211,6 +214,7 @@ var drawGraph = function() {
       }
     }
   }
+
 
   //Needs to draw value if > 0 --- ???? IDK What this is...
 }

@@ -4,36 +4,6 @@ app.controller('MainCtrl', [
   '$scope',
   function($scope) {
 
-    // Initializes the graph to the defaults
-    // $scope.nodes = [
-    //   new node('A',[],75,75),
-    //   new node('B',[],175,175),
-    //   new node('C',[],300,75),
-    //   new node('D',[],450,175),
-    //   new node('E',[],450,75),
-    //   new node('F',[],370,250)
-    // ];
-    //
-    // $scope.nodes[0].addEdge($scope.nodes[1],10);
-    // $scope.nodes[0].addEdge($scope.nodes[2],115);
-    //
-    // $scope.nodes[1].addEdge($scope.nodes[0],10);
-    // $scope.nodes[1].addEdge($scope.nodes[2],5);
-    //
-    // $scope.nodes[2].addEdge($scope.nodes[0],115);
-    // $scope.nodes[2].addEdge($scope.nodes[1],5);
-    // $scope.nodes[2].addEdge($scope.nodes[3],10);
-    // $scope.nodes[2].addEdge($scope.nodes[4],15);
-    // $scope.nodes[2].addEdge($scope.nodes[5],25);
-    //
-    // $scope.nodes[3].addEdge($scope.nodes[2],10);
-    // $scope.nodes[3].addEdge($scope.nodes[5],5);
-    //
-    // $scope.nodes[4].addEdge($scope.nodes[2],15);
-    //
-    // $scope.nodes[5].addEdge($scope.nodes[3],5);
-    // $scope.nodes[5].addEdge($scope.nodes[2],25);
-
     $scope.nodes = [];
 
     $scope.waypoints = [];
@@ -120,13 +90,24 @@ app.controller('MainCtrl', [
       }
       // Push to Graph
       $scope.nodes.push(tNode);
-
       showMessage('Adding a new node: ' + tNode.title);
 
       $scope.updateGraph();
+
+      // Clears every input form for nodes
       $scope.title = '';
       $scope.x = '';
       $scope.y = '';
+      for(var i = 0; i < $scope.nodes.length; i++) {
+        e = document.getElementById('edge-' + $scope.nodes[i].title);
+        if(e !== undefined && e !== null) {
+          if(e.checked) {
+            e.checked = false;
+            e = document.getElementById('weight-' + $scope.nodes[i].title);
+            e.value = '';
+          }
+        }
+      }
     }
 
     // Removes the passes node
@@ -135,23 +116,16 @@ app.controller('MainCtrl', [
 
       for(var i = 0; i < $scope.nodes.length; i++) { // Find the node
         if($scope.nodes[i].title.localeCompare(nTitle) === 0) {
-
           tNode1 = $scope.nodes[i];
-          // alert(tNode1.edges.length);
           for(var j = 0; j < tNode1.edges.length; j++) { // Iterate through the edge nodes
             tNode2 = tNode1.edges[j][0];
-            // alert('Looking at ' + tNode2.title);
-            for(var k = 0; k < tNode2.edges.length; k++) { //Iterate through those nodes' edge nodes
-            // alert(tNode2.edges[k][0].title + '|' + tNode1.title);
-            // alert(tNode2.edges[k][0].title.localeCompare(tNode1.title) === 0);
+            for(var k = 0; k < tNode2.edges.length; k++) { // Iterate through those nodes' edge nodes
               if(tNode2.edges[k][0].title.localeCompare(tNode1.title) === 0) {
-                // alert('Removing ' + tNode2.edges[k][0].title);
                 tNode2.edges.splice(k,1);
                 break;
               }
             }
           }
-          // alert('Removing ' + tNode1.title + ' from $scope.nodes');
           $scope.nodes.splice(i,1);
           break;
         }
@@ -211,7 +185,9 @@ app.controller('MainCtrl', [
     }
 
     $scope.preset1 = function() {
-      $scope.nodes = [];
+      while($scope.nodes.length > 0) {
+        $scope.nodes.splice(0,1);
+      }
 
       $scope.nodes.push(new node('A',[],75,75));
       $scope.nodes.push(new node('B',[],175,175));
@@ -245,7 +221,9 @@ app.controller('MainCtrl', [
     }
 
     $scope.preset2 = function() {
-      $scope.nodes = [];
+      while($scope.nodes.length > 0) {
+        $scope.nodes.splice(0,1);
+      }
 
       $scope.nodes.push(new node('A',[],100,150));
       $scope.nodes.push(new node('B',[],225,75));
