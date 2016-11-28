@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Graph Visualization</title>
+
+    <!-- My stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- MDL Styles and such -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.blue-green.min.css" />
+    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+
+    <!-- All of my JS -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script> -->
+    <script src="angular.js"></script>
+    <script src="heap.js"></script>
+    <script src="searching.js"></script>
+    <script src="drawing.js"></script>
+    <script src="app.js"></script>
+    <script src="functions.js"></script>
+  </head>
+
+  <body ng-app="WKUDirections" ng-controller="MainCtrl">
+    <div class="side-bar" id="side-bar">
+      <div class="main-options scroll-bar">
+        <button class="expand-btn" onclick="toggleSideBar()">
+          <img src="img/grabber.svg" width="100%" height="100%"></img>
+        </button>
+        <form ng-submit="search()">
+          <select id="type" ng-model="type">
+            <option value="" disabled selected style="display: none;">Search Type</option>
+            <option value="1">Breadth-First Search</option>
+            <option value="2">Depth-First Search</option>
+            <option value="3">Uniform Cost Search</option>
+            <option value="4">Greedy Best-First Search</option>
+            <option value="5">A* Search</option>
+          </select>
+          <div class="select-row">
+            <select id="start" ng-model="start">
+              <option value="" disabled selected style="display: none;">Starting Node</option>
+              <option ng-repeat="node in nodes" value="{{node.title}}">{{node.title}}</option>
+            </select>
+          </div>
+          <div ng-repeat="waypoint in waypoints">
+            <div class="select-row">
+              <select id="start" ng-model="waypoints.node">
+                <option value="" disabled selected style="display: none;">Waypoint {{waypoint.name}}</option>
+                <option ng-repeat="node in nodes" value="{{node.title}}">{{node.title}}</option>
+              </select>
+              <button class="remove-btn" ng-click="removeWP(waypoint.name)">X</button>
+            </div>
+          </div>
+          <span class="dark-btn" ng-click="add()">+</span>
+          <span class="sub-text">Add a waypoint</span>
+          <div class="select-row">
+            <select ng-model="end">
+              <option value="" disabled selected style="display: none;">Ending Node</option>
+              <option ng-repeat="node in nodes" value="{{node.title}}">{{node.title}}</option>
+            </select>
+          </div>
+          <div class="range">
+            <input class="mdl-slider mdl-js-slider" type="range" ng-model="speed"
+            min="100" max="2000" value="500" step="100" tabindex="0"></input>
+            <span class="range-out" ng-bind="speed + 'ms'" onchange="convertToSeconds(this)"></span>
+          </div>
+          <button class="flat-btn" type="submit">Search</button>
+        </form>
+        <button class="flat-btn" ng-click="updateGraph()">Update</button>
+        <button class="flat-btn" onclick="togglePopup()">Load a preset</button>
+      </div>
+
+      <!-- Graph Options -->
+      <div class="more-options scroll-bar">
+        <span class="sub-head">Graph Building</span>
+        <form ng-submit="addNode()">
+          <div class="in-item">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="title" ng-model="title">
+              <label class="mdl-textfield__label" for="title">Node Title</label>
+            </div>
+          </div>
+          <div class="in-item">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="number" id="x" ng-model="x">
+              <label class="mdl-textfield__label" for="x">X-Coordinate</label>
+            </div>
+          </div>
+          <div class="in-item">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="number" id="y" ng-model="y">
+              <label class="mdl-textfield__label" for="y">Y-Coordinate</label>
+            </div>
+          </div>
+          <span ng-show="($scope.nodes.length > 0)">Edges</span>
+          <div class="edge-in-half-row" ng-repeat="node in nodes track by $index">
+            <div class="edge-check">
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="edge-{{node.title}}">
+                <input type="checkbox" id="edge-{{node.title}}" class="mdl-checkbox__input">
+                <span class="mdl-checkbox__label">{{node.title}}</span>
+              </label>
+            </div>
+            <div class="weight-in">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="number" id="weight-{{node.title}}">
+                <label class="mdl-textfield__label" for="weight-{{node.title}}">Edge Weight</label>
+              </div>
+            </div>
+          </div>
+          <button class="main-btn" type="submit">Add Node</button>
+        </form>
+
+        <div class="tbl-container"> <!-- Node Table -->
+          <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+              <tr>
+                <th class="mdl-data-table__cell--non-numeric">Node Title</th>
+                <th>X-Coordinate</th>
+                <th>Y-Coordinate</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="node in nodes">
+                <td class="mdl-data-table__cell--non-numeric">{{node.title}}</td>
+                <td>{{node.x}}</td>
+                <td>{{node.y}}</td>
+                <td>
+                  <button class="remove-btn" ng-click="removeNode(node.title)" ng-attr-id="{{ 'node-' + node.title}}">X</button>
+                  <div class="mdl-tooltip" ng-data-mdl-for="node.title">Remove Node</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div> <!--End Node Table-->
+      </div>
+    </div>
+
+    <!-- Canvas -->
+    <div class="main-container">
+      <canvas id="canvas"></canvas>
+    </div>
+    <div id="message-bar" class="mdl-js-snackbar mdl-snackbar">
+      <div class="mdl-snackbar__text"></div>
+      <button class="mdl-snackbar__action" type="button"></button>
+    </div>
+    <div id="filler" onclick="togglePopup()"></div>
+    <div id="window">
+      <!-- Add presets here -->
+      <div class="item" ng-click="preset1()"></div>
+      <div class="item" ng-click="preset2()"></div>
+    </div>
+  </body>
+</html>

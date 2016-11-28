@@ -1,0 +1,7 @@
+- Maybe add a dashed line to the currently expanded node to show the path being looked at
+
+- Not sure if greedy best first works or not
+
+- Make sure we parseInt() every value before calculating
+
+- Delete not working always???
