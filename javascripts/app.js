@@ -67,11 +67,20 @@ app.controller('MainCtrl', [
           if(e.checked) {
             e = document.getElementById('weight-' + $scope.nodes[i].title);
             var tWeight = parseInt(e.value);
+            var tDist = Math.pow( Math.pow($scope.nodes[i].x-parseInt($scope.x),2)+Math.pow($scope.nodes[i].y-parseInt($scope.y),2),.5);
             if(tWeight === null || tWeight === undefined || tWeight < 1) {
               alert('Edge weights must be a positive integer.');
               return;
+            } else if( parseInt(tWeight) < tDist) { // If it will mess with the heuristic
+              if(confirm('One or more of your node edges is too small for the heuristic to work properly.')) {
+                tEdges.push([$scope.nodes[i],tWeight]);
+              } else {
+                alert('Try a number greater than ' + tDist + ' next time.');
+                return;
+              }
+            } else {
+              tEdges.push([$scope.nodes[i],tWeight]);
             }
-            tEdges.push([$scope.nodes[i],tWeight]);
           }
         }
       }
@@ -196,25 +205,25 @@ app.controller('MainCtrl', [
       $scope.nodes.push(new node('E',[],450,75));
       $scope.nodes.push(new node('F',[],370,250));
 
-      $scope.nodes[0].addEdge($scope.nodes[1],10);
-      $scope.nodes[0].addEdge($scope.nodes[2],115);
+      $scope.nodes[0].addEdge($scope.nodes[1],145);
+      $scope.nodes[0].addEdge($scope.nodes[2],225);
 
-      $scope.nodes[1].addEdge($scope.nodes[0],10);
-      $scope.nodes[1].addEdge($scope.nodes[2],5);
+      $scope.nodes[1].addEdge($scope.nodes[0],145);
+      $scope.nodes[1].addEdge($scope.nodes[2],165);
 
-      $scope.nodes[2].addEdge($scope.nodes[0],115);
-      $scope.nodes[2].addEdge($scope.nodes[1],5);
-      $scope.nodes[2].addEdge($scope.nodes[3],10);
-      $scope.nodes[2].addEdge($scope.nodes[4],15);
-      $scope.nodes[2].addEdge($scope.nodes[5],25);
+      $scope.nodes[2].addEdge($scope.nodes[0],225);
+      $scope.nodes[2].addEdge($scope.nodes[1],165);
+      $scope.nodes[2].addEdge($scope.nodes[3],185);
+      $scope.nodes[2].addEdge($scope.nodes[4],150);
+      $scope.nodes[2].addEdge($scope.nodes[5],190);
 
-      $scope.nodes[3].addEdge($scope.nodes[2],10);
-      $scope.nodes[3].addEdge($scope.nodes[5],5);
+      $scope.nodes[3].addEdge($scope.nodes[2],185);
+      $scope.nodes[3].addEdge($scope.nodes[5],110);
 
-      $scope.nodes[4].addEdge($scope.nodes[2],15);
+      $scope.nodes[4].addEdge($scope.nodes[2],150);
 
-      $scope.nodes[5].addEdge($scope.nodes[3],5);
-      $scope.nodes[5].addEdge($scope.nodes[2],25);
+      $scope.nodes[5].addEdge($scope.nodes[2],190);
+      $scope.nodes[5].addEdge($scope.nodes[3],110);
 
       $scope.updateGraph();
       togglePopup();
