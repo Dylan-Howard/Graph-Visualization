@@ -1,9 +1,26 @@
 - Maybe add a dashed line to the currently expanded node to show the path being looked at
 
-- greedy best first does not work
-
 - Make sure we parseInt() every value before calculating
 
-- Add wku map preset
+**- Add wku map preset
 
-- add auto populate edge weights
+**- add auto populate edge weights
+
+
+- Demo 1
+  preset: the grid
+  search: dfs
+  start:  a1
+  end:    f1
+
+- Demo 2
+  preset: the grid
+  search: bfs
+  start:  a1
+  end:    f1
+
+-Demo 3
+  preset: the grid
+  search: A*
+  start:  a1
+  end:    f1

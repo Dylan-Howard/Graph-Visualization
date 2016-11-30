@@ -33,7 +33,7 @@
             <option value="1">Breadth-First Search</option>
             <option value="2">Depth-First Search</option>
             <option value="3">Uniform Cost Search</option>
-            <option value="4">Greedy Best-First Search</option>
+            <!-- <option value="4">Greedy Best-First Search</option> -->
             <option value="5">A* Search</option>
           </select>
           <div class="select-row">
@@ -147,8 +147,15 @@
     <div id="filler" onclick="togglePopup()"></div>
     <div id="window">
       <!-- Add presets here -->
-      <div class="item" ng-click="preset1()"></div>
-      <div class="item" ng-click="preset2()"></div>
+      <div class="item" ng-click="preset1()">
+        <span>Standard Graph</span>
+      </div>
+      <div class="item" ng-click="preset2()">
+        <span>K-5 Graph</span>
+      </div>
+      <div class="item" ng-click="preset3()">
+        <span>The Grid</span>
+      </div>
     </div>
   </body>
 </html>

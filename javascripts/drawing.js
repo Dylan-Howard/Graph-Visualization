@@ -145,7 +145,14 @@ var drawNode = function(node) {
   if(node.title === undefined) {
     alert('test');
   }
-  ctx.fillText(node.title,node.x-6,node.y+6);
+  if(node.title.length === 1) {
+    ctx.fillText(node.title,node.x-6,node.y+6);
+  } else if(node.title.length === 2) {
+    ctx.fillText(node.title,node.x-12,node.y+7);
+  } else {
+    ctx.fillText(node.title,node.x-6,node.y+6);
+  }
+  // ctx.fillText();
 }
 // Draws a Line between two points
 var drawLine = function(x1,y1,x2,y2,color) {

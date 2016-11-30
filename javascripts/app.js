@@ -269,5 +269,207 @@ app.controller('MainCtrl', [
       togglePopup();
     }
 
+    $scope.preset3 = function() {
+      while($scope.nodes.length > 0) {
+        $scope.nodes.splice(0,1);
+      }
+      // 0-5
+      $scope.nodes.push(new node('A1',[],100,100));
+      $scope.nodes.push(new node('B1',[],100,200));
+      $scope.nodes.push(new node('C1',[],100,300));
+      $scope.nodes.push(new node('D1',[],100,400));
+      $scope.nodes.push(new node('E1',[],100,500));
+      $scope.nodes.push(new node('F1',[],100,600));
+      // 6-11
+      $scope.nodes.push(new node('A2',[],200,100));
+      $scope.nodes.push(new node('B2',[],200,200));
+      $scope.nodes.push(new node('C2',[],200,300));
+      $scope.nodes.push(new node('D2',[],200,400));
+      $scope.nodes.push(new node('E2',[],200,500));
+      $scope.nodes.push(new node('F2',[],200,600));
+      // 12-17
+      $scope.nodes.push(new node('A3',[],300,100));
+      $scope.nodes.push(new node('B3',[],300,200));
+      $scope.nodes.push(new node('C3',[],300,300));
+      $scope.nodes.push(new node('D3',[],300,400));
+      $scope.nodes.push(new node('E3',[],300,500));
+      $scope.nodes.push(new node('F3',[],300,600));
+      // 18-23
+      $scope.nodes.push(new node('A4',[],400,100));
+      $scope.nodes.push(new node('B4',[],400,200));
+      $scope.nodes.push(new node('C4',[],400,300));
+      $scope.nodes.push(new node('D4',[],400,400));
+      $scope.nodes.push(new node('E4',[],400,500));
+      $scope.nodes.push(new node('F4',[],400,600));
+      // 24-29
+      $scope.nodes.push(new node('A4',[],500,100));
+      $scope.nodes.push(new node('B4',[],500,200));
+      $scope.nodes.push(new node('C4',[],500,300));
+      $scope.nodes.push(new node('D4',[],500,400));
+      $scope.nodes.push(new node('E4',[],500,500));
+      $scope.nodes.push(new node('F4',[],500,600));
+      // 30-35
+      $scope.nodes.push(new node('A5',[],600,100));
+      $scope.nodes.push(new node('B5',[],600,200));
+      $scope.nodes.push(new node('C5',[],600,300));
+      $scope.nodes.push(new node('D5',[],600,400));
+      $scope.nodes.push(new node('E5',[],600,500));
+      $scope.nodes.push(new node('F5',[],600,600));
+
+      // Edge addition
+      $scope.nodes[0].addEdge($scope.nodes[1],100);
+      $scope.nodes[1].addEdge($scope.nodes[0],100);
+      $scope.nodes[0].addEdge($scope.nodes[6],100);
+      $scope.nodes[6].addEdge($scope.nodes[0],100);
+
+      $scope.nodes[1].addEdge($scope.nodes[2],100);
+      $scope.nodes[2].addEdge($scope.nodes[1],100);
+      $scope.nodes[1].addEdge($scope.nodes[7],100);
+      $scope.nodes[7].addEdge($scope.nodes[1],100);
+
+      $scope.nodes[2].addEdge($scope.nodes[3],100);
+      $scope.nodes[3].addEdge($scope.nodes[2],100);
+      $scope.nodes[2].addEdge($scope.nodes[8],100);
+      $scope.nodes[8].addEdge($scope.nodes[2],100);
+
+      $scope.nodes[3].addEdge($scope.nodes[4],100);
+      $scope.nodes[4].addEdge($scope.nodes[3],100);
+      $scope.nodes[3].addEdge($scope.nodes[9],100);
+      $scope.nodes[9].addEdge($scope.nodes[3],100);
+
+      $scope.nodes[4].addEdge($scope.nodes[5],100);
+      $scope.nodes[5].addEdge($scope.nodes[4],100);
+      $scope.nodes[4].addEdge($scope.nodes[10],100);
+      $scope.nodes[10].addEdge($scope.nodes[4],100);
+
+      $scope.nodes[5].addEdge($scope.nodes[11],100);
+      $scope.nodes[11].addEdge($scope.nodes[5],100);
+
+      $scope.nodes[6].addEdge($scope.nodes[7],100);
+      $scope.nodes[7].addEdge($scope.nodes[6],100);
+      $scope.nodes[6].addEdge($scope.nodes[12],100);
+      $scope.nodes[12].addEdge($scope.nodes[6],100);
+
+      $scope.nodes[7].addEdge($scope.nodes[8],100);
+      $scope.nodes[8].addEdge($scope.nodes[7],100);
+      $scope.nodes[7].addEdge($scope.nodes[13],100);
+      $scope.nodes[13].addEdge($scope.nodes[7],100);
+
+      $scope.nodes[8].addEdge($scope.nodes[9],100);
+      $scope.nodes[9].addEdge($scope.nodes[8],100);
+      $scope.nodes[8].addEdge($scope.nodes[14],100);
+      $scope.nodes[14].addEdge($scope.nodes[8],100);
+
+      $scope.nodes[9].addEdge($scope.nodes[10],100);
+      $scope.nodes[10].addEdge($scope.nodes[9],100);
+      $scope.nodes[9].addEdge($scope.nodes[15],100);
+      $scope.nodes[15].addEdge($scope.nodes[9],100);
+
+      $scope.nodes[10].addEdge($scope.nodes[11],100);
+      $scope.nodes[11].addEdge($scope.nodes[10],100);
+      $scope.nodes[10].addEdge($scope.nodes[16],100);
+      $scope.nodes[16].addEdge($scope.nodes[10],100);
+
+      $scope.nodes[11].addEdge($scope.nodes[17],100);
+      $scope.nodes[17].addEdge($scope.nodes[11],100);
+
+      $scope.nodes[12].addEdge($scope.nodes[13],100);
+      $scope.nodes[13].addEdge($scope.nodes[12],100);
+      $scope.nodes[12].addEdge($scope.nodes[18],100);
+      $scope.nodes[18].addEdge($scope.nodes[12],100);
+
+      $scope.nodes[13].addEdge($scope.nodes[14],100);
+      $scope.nodes[14].addEdge($scope.nodes[13],100);
+      $scope.nodes[13].addEdge($scope.nodes[19],100);
+      $scope.nodes[19].addEdge($scope.nodes[13],100);
+
+      $scope.nodes[14].addEdge($scope.nodes[15],100);
+      $scope.nodes[15].addEdge($scope.nodes[14],100);
+      $scope.nodes[14].addEdge($scope.nodes[20],100);
+      $scope.nodes[20].addEdge($scope.nodes[14],100);
+
+      $scope.nodes[15].addEdge($scope.nodes[16],100);
+      $scope.nodes[16].addEdge($scope.nodes[15],100);
+      $scope.nodes[15].addEdge($scope.nodes[21],100);
+      $scope.nodes[21].addEdge($scope.nodes[15],100);
+
+      $scope.nodes[16].addEdge($scope.nodes[17],100);
+      $scope.nodes[17].addEdge($scope.nodes[16],100);
+      $scope.nodes[16].addEdge($scope.nodes[22],100);
+      $scope.nodes[22].addEdge($scope.nodes[16],100);
+
+      $scope.nodes[17].addEdge($scope.nodes[23],100);
+      $scope.nodes[23].addEdge($scope.nodes[17],100);
+
+      $scope.nodes[18].addEdge($scope.nodes[19],100);
+      $scope.nodes[19].addEdge($scope.nodes[18],100);
+      $scope.nodes[18].addEdge($scope.nodes[24],100);
+      $scope.nodes[24].addEdge($scope.nodes[18],100);
+
+      $scope.nodes[19].addEdge($scope.nodes[20],100);
+      $scope.nodes[20].addEdge($scope.nodes[19],100);
+      $scope.nodes[19].addEdge($scope.nodes[25],100);
+      $scope.nodes[25].addEdge($scope.nodes[19],100);
+
+      $scope.nodes[20].addEdge($scope.nodes[21],100);
+      $scope.nodes[21].addEdge($scope.nodes[20],100);
+      $scope.nodes[20].addEdge($scope.nodes[26],100);
+      $scope.nodes[26].addEdge($scope.nodes[20],100);
+
+      $scope.nodes[21].addEdge($scope.nodes[22],100);
+      $scope.nodes[22].addEdge($scope.nodes[21],100);
+      $scope.nodes[21].addEdge($scope.nodes[27],100);
+      $scope.nodes[27].addEdge($scope.nodes[21],100);
+
+      $scope.nodes[22].addEdge($scope.nodes[23],100);
+      $scope.nodes[23].addEdge($scope.nodes[22],100);
+      $scope.nodes[22].addEdge($scope.nodes[28],100);
+      $scope.nodes[28].addEdge($scope.nodes[22],100);
+
+      $scope.nodes[23].addEdge($scope.nodes[29],100);
+      $scope.nodes[29].addEdge($scope.nodes[23],100);
+
+      $scope.nodes[24].addEdge($scope.nodes[25],100);
+      $scope.nodes[25].addEdge($scope.nodes[24],100);
+      $scope.nodes[24].addEdge($scope.nodes[30],100);
+      $scope.nodes[30].addEdge($scope.nodes[24],100);
+
+      $scope.nodes[25].addEdge($scope.nodes[26],100);
+      $scope.nodes[26].addEdge($scope.nodes[25],100);
+      $scope.nodes[25].addEdge($scope.nodes[31],100);
+      $scope.nodes[31].addEdge($scope.nodes[25],100);
+
+      $scope.nodes[26].addEdge($scope.nodes[27],100);
+      $scope.nodes[27].addEdge($scope.nodes[26],100);
+      $scope.nodes[26].addEdge($scope.nodes[32],100);
+      $scope.nodes[32].addEdge($scope.nodes[26],100);
+
+      $scope.nodes[27].addEdge($scope.nodes[28],100);
+      $scope.nodes[28].addEdge($scope.nodes[27],100);
+      $scope.nodes[27].addEdge($scope.nodes[33],100);
+      $scope.nodes[33].addEdge($scope.nodes[27],100);
+
+      $scope.nodes[28].addEdge($scope.nodes[29],100);
+      $scope.nodes[29].addEdge($scope.nodes[28],100);
+      $scope.nodes[28].addEdge($scope.nodes[34],100);
+      $scope.nodes[34].addEdge($scope.nodes[28],100);
+
+      $scope.nodes[29].addEdge($scope.nodes[35],100);
+      $scope.nodes[35].addEdge($scope.nodes[29],100);
+
+      $scope.nodes[30].addEdge($scope.nodes[31],100);
+      $scope.nodes[31].addEdge($scope.nodes[30],100);
+      $scope.nodes[31].addEdge($scope.nodes[32],100);
+      $scope.nodes[32].addEdge($scope.nodes[31],100);
+      $scope.nodes[32].addEdge($scope.nodes[33],100);
+      $scope.nodes[33].addEdge($scope.nodes[32],100);
+      $scope.nodes[33].addEdge($scope.nodes[34],100);
+      $scope.nodes[34].addEdge($scope.nodes[33],100);
+      $scope.nodes[34].addEdge($scope.nodes[35],100);
+      $scope.nodes[35].addEdge($scope.nodes[34],100);
+
+      $scope.updateGraph();
+      togglePopup();
+    }
 
 }]);
