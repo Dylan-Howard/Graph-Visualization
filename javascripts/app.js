@@ -302,19 +302,19 @@ app.controller('MainCtrl', [
       $scope.nodes.push(new node('E4',[],400,500));
       $scope.nodes.push(new node('F4',[],400,600));
       // 24-29
-      $scope.nodes.push(new node('A4',[],500,100));
-      $scope.nodes.push(new node('B4',[],500,200));
-      $scope.nodes.push(new node('C4',[],500,300));
-      $scope.nodes.push(new node('D4',[],500,400));
-      $scope.nodes.push(new node('E4',[],500,500));
-      $scope.nodes.push(new node('F4',[],500,600));
+      $scope.nodes.push(new node('A5',[],500,100));
+      $scope.nodes.push(new node('B5',[],500,200));
+      $scope.nodes.push(new node('C5',[],500,300));
+      $scope.nodes.push(new node('D5',[],500,400));
+      $scope.nodes.push(new node('E5',[],500,500));
+      $scope.nodes.push(new node('F5',[],500,600));
       // 30-35
-      $scope.nodes.push(new node('A5',[],600,100));
-      $scope.nodes.push(new node('B5',[],600,200));
-      $scope.nodes.push(new node('C5',[],600,300));
-      $scope.nodes.push(new node('D5',[],600,400));
-      $scope.nodes.push(new node('E5',[],600,500));
-      $scope.nodes.push(new node('F5',[],600,600));
+      $scope.nodes.push(new node('A6',[],600,100));
+      $scope.nodes.push(new node('B6',[],600,200));
+      $scope.nodes.push(new node('C6',[],600,300));
+      $scope.nodes.push(new node('D6',[],600,400));
+      $scope.nodes.push(new node('E6',[],600,500));
+      $scope.nodes.push(new node('F6',[],600,600));
 
       // Edge addition
       $scope.nodes[0].addEdge($scope.nodes[1],100);
