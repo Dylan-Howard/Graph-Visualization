@@ -1,4 +1,3 @@
-
 /**
  * Operations
  */
@@ -43,10 +42,6 @@ var runUcs = function(start, end, speed) {
     }
   }
   ucs(g,g.nodes[s],g.nodes[e],speed);
-}
-
-var runGbf = function() {
-  gbf(g,n1,n5);
 }
 
 var runAStar = function(start, end, speed) {

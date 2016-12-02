@@ -180,10 +180,6 @@ app.controller('MainCtrl', [
           runUcs($scope.start,$scope.end,$scope.speed);
           break;
         case '4':
-          showMessage('Searching for a path from ' + $scope.start + ' to ' + $scope.end + ' using Greedy Best-First Search');
-          runGbf();
-          break;
-        case '5':
           showMessage('Searching for a path from ' + $scope.start + ' to ' + $scope.end + ' using A* Search');
           runAStar($scope.start,$scope.end,$scope.speed);
           break;
